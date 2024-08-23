@@ -43,6 +43,7 @@
     "playwright-core": "^1.32.3",
     "rimraf": "^5.0.0",
     "rollup": "^3.20.6",
+    "rollup-plugin-includepaths": "^0.2.4",
     "rollup-plugin-license": "^3.0.1",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-node-builtins": "^2.1.2",

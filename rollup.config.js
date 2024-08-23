@@ -4,14 +4,29 @@ import json from "@rollup/plugin-json";
 import terser from "@rollup/plugin-terser";
 import license from "rollup-plugin-license";
 import nodePolyfills from 'rollup-plugin-polyfill-node';
+import includePaths from 'rollup-plugin-includepaths';
 
-import pkg from "./package.json" assert {
-  type: 'json'
+import pkg from "./package.json" with {
+	type: 'json'
 };
 
 const plugins = [
+	//nodeResolve({
+	//	// force css-tree to load CommonJS as ESM use NodeJS specific features
+	//	extensions: [".cjs"],
+	//	mainFields: ["main"],
+	//	resolveOnly: ["css-tree"]
+	//}),
+	includePaths({
+		// css-tree unbundled ESM uses NodeJS specific features
+		include: {
+			'css-tree': 'node_modules/css-tree/dist/csstree.esm.js'
+		},
+		extensions: ['.js']
+	}),
 	nodeResolve({
-		extensions: [".cjs",".mjs", ".js"]
+		extensions: [".cjs",".mjs", ".js"],
+		resolveOnly: module => module != "css-tree"
 	}),
 	commonjs({
 		include: "node_modules/**",
@@ -55,7 +70,7 @@ export default [
 		plugins: plugins
 	},
 
-  // minified 
+	// minified
 	{
 		input: pkg.main,
 		output: {
