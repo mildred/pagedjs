@@ -33,7 +33,7 @@ class PageCounterIncrement extends Handler {
 
 	handleIncrement(declaration, rule) {
 		const identifier = declaration.value.children.first;
-		const number = declaration.value.children.getSize() > 1 ? declaration.value.children.last().value : 1;
+		const number = declaration.value.children.getSize() > 1 ? declaration.value.children.last.value : 1;
 		const name = identifier && identifier.name;
 
 		if (name && name.indexOf("target-counter-") === 0) {
