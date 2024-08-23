@@ -143,13 +143,16 @@ class Previewer {
 
 		await this.hooks.beforePreview.trigger(content, renderTo);
 
+		let doc = content?.ownerDocument;
+
 		if (!content) {
 			content = this.wrapContent();
+			doc = document;
 		}
 
 		if (!stylesheets) {
-			let remove = (content.ownerDocument === renderTo?.ownerDocument)
-			stylesheets = this.removeStyles(content.ownerDocument, { remove });
+			let remove = (doc === renderTo?.ownerDocument)
+			stylesheets = this.removeStyles(doc, { remove });
 		}
 
 		this.polisher.setup(renderTo?.ownerDocument);
