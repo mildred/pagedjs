@@ -247,7 +247,7 @@ class Sheet {
 						idNode.matcher = "=";
 						idNode.name = {type: "Identifier", loc: null, name: "data-id"};
 						idNode.type = "AttributeSelector";
-						idNode.value = {type: "String", loc: null, value: `"${name}"`};
+						idNode.value = {type: "String", loc: null, value: name};
 					}
 				});
 			}
