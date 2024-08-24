@@ -637,6 +637,8 @@ class Layout {
 	findBreakToken(rendered, source, bounds = this.bounds, prevBreakToken, node = null, extract = true) {
 		let breakToken;
 
+		if (node === null) node = prevBreakToken?.node
+
 		let overflowResult = this.findOverflow(rendered, bounds, source);
 		if (overflowResult) {
 			breakToken = this.processOverflowResult(overflowResult, rendered, source, bounds, prevBreakToken, node, extract);
