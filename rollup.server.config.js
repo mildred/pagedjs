@@ -3,10 +3,19 @@ import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import serve from "rollup-plugin-serve";
 import livereload from "rollup-plugin-livereload";
+import includePaths from 'rollup-plugin-includepaths';
 
 const plugins = [
+  includePaths({
+		// css-tree unbundled ESM uses NodeJS specific features
+		include: {
+			'css-tree': 'node_modules/css-tree/dist/csstree.esm.js'
+		},
+		extensions: ['.js']
+	}),
 	nodeResolve({
-		extensions: [".cjs",".mjs", ".js"]
+		extensions: [".cjs",".mjs", ".js"],
+		resolveOnly: module => module != "css-tree"
 	}),
 	commonjs({
 		include: ["node_modules/**"]
